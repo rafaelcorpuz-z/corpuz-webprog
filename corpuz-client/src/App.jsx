@@ -10,8 +10,8 @@ function App() {
       <header className="App-header">
         <h1>Welcome to My React App!</h1>
         <p>
-          Name: John Rafael P. Corpuz
-          Email: johnrafaelcorpuz00@gmail.com
+          Name: John Rafael P. Corpuz<br />
+          Email: johnrafaelcorpuz00@gmail.com<br />
           GitHub Link: <a href="https://github.com/rafaelcorpuz-z">GitHub Link</a>
         </p>
       </header>
