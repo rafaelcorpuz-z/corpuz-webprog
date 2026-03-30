@@ -20,7 +20,7 @@ const Button = ({
     .join(" ")
     .trim();
 
-  // If "to" exists → act as Link
+ 
   if (to) {
     return (
       <Link to={to} className={classes}>
@@ -29,7 +29,7 @@ const Button = ({
     );
   }
 
-  // Otherwise → act as normal button
+
   return (
     <button type={type} className={classes}>
       {children}

@@ -1,12 +1,26 @@
 import Button from "../components/Button";
-
+import Spiderman from '../assets/images/Spiderman.jpg';
+ 
+// ⬇️ Import your 4 gallery images here, my king!
+import Gallery1 from '../assets/images/gallery-1.jpg';
+import Gallery2 from '../assets/images/gallery-2.jpg';
+import Gallery3 from '../assets/images/gallery-3.jpg';
+import Gallery4 from '../assets/images/gallery-4.jpg';
+ 
+const galleryImages = [
+  { src: Gallery1, alt: "Gallery 1" },
+  { src: Gallery2, alt: "Gallery 2" },
+  { src: Gallery3, alt: "Gallery 3" },
+  { src: Gallery4, alt: "Gallery 4" },
+];
+ 
 const profileStats = [
   { value: "17", label: "Age When Bitten" },
   { value: "10+", label: "Years Active" },
   { value: "42", label: "Suits Designed" },
   { value: "3", label: "Secret Identities" },
 ];
-
+ 
 const blocks = [
   {
     title: "Origin Story",
@@ -18,53 +32,30 @@ const blocks = [
   },
   {
     title: "Dual Life",
-    body: "Balancing life as Peter Parker — student, photographer for the Daily Bugle, and friend — with his duties as Spider-Man has always been Spider-Man's greatest challenge.",
+    body: "Balancing life as Me — student, photographer for the Daily Bugle, and friend — with his duties as Spider-Man has always been Spider-Man's greatest challenge.",
   },
 ];
-
+ 
 const AboutPage = () => {
   return (
     <div className="flex w-full flex-col gap-0 bg-[#0a0a0a] text-white">
-
+ 
       {/* ─── HERO SECTION ─────────────────────────────── */}
       <section className="border-b border-[#FF2020]/20 px-6 py-16">
         <div className="mx-auto max-w-6xl grid gap-12 lg:grid-cols-2 items-center">
-
-          {/*
-            ⬇️ LINE 38 — PROFILE / ABOUT IMAGE
-            Replace the div below with:
-            <img
-              src="/images/spiderman-about.png"
-              alt="Spider-Man Profile"
-              className="w-full rounded-2xl object-cover max-h-[500px]"
-            />
-            Recommended: Spider-Man portrait or mask close-up, 600x500px
-          */}
-          <div className="rounded-2xl border border-dashed border-[#FF2020]/30 bg-[#111] overflow-hidden">
-            <div className="flex min-h-[420px] flex-col items-center justify-center gap-3 p-8">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                <circle cx="32" cy="24" r="14" stroke="#FF2020" strokeWidth="1.5" />
-                <path d="M10 56 Q32 40 54 56" stroke="#FF2020" strokeWidth="1.5" fill="none" />
-                <circle cx="26" cy="22" r="5" fill="#FF2020" fillOpacity="0.3" stroke="#FF2020" strokeWidth="1" />
-                <circle cx="38" cy="22" r="5" fill="#FF2020" fillOpacity="0.3" stroke="#FF2020" strokeWidth="1" />
-              </svg>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#FF2020]/60">
-                Profile Photo Here
-              </p>
-              <p className="text-center text-[11px] text-zinc-600">
-                Recommended: Spider-Man portrait, 600×500px
-              </p>
-            </div>
-          </div>
-          {/* ⬆️ LINE 68 — END PROFILE IMAGE */}
-
-          {/* TEXT */}
+ 
+          <img
+            src={Spiderman}
+            alt="Spider-Man Profile"
+            className="w-full rounded-2xl object-cover max-h-[500px]"
+          />
+ 
           <div>
             <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.4em] text-[#FF2020]">
               The Man Behind the Mask
             </p>
             <h1 className="text-4xl font-black uppercase leading-tight text-white sm:text-5xl">
-              Peter Parker<br />
+              Me<br />
               <span className="text-[#FF2020]">Spider-Man</span>
             </h1>
             <p className="mt-5 max-w-lg text-base leading-7 text-zinc-400">
@@ -77,10 +68,10 @@ const AboutPage = () => {
               <Button to="/articles">Read Articles</Button>
             </div>
           </div>
-
+ 
         </div>
       </section>
-
+ 
       {/* ─── STATS SECTION ────────────────────────────── */}
       <section className="border-b border-[#FF2020]/20 bg-[#0f0f0f] px-6 py-14">
         <div className="mx-auto max-w-6xl">
@@ -102,11 +93,11 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-
+ 
       {/* ─── CONTENT BLOCKS + SIDE PANEL ─────────────── */}
       <section className="border-b border-[#FF2020]/20 px-6 py-14">
         <div className="mx-auto max-w-6xl grid gap-8 lg:grid-cols-[1fr_380px]">
-
+ 
           {/* Story Blocks */}
           <div className="space-y-5">
             {blocks.map((block, i) => (
@@ -121,41 +112,36 @@ const AboutPage = () => {
               </div>
             ))}
           </div>
-
-          {/* Side Panel with image grid */}
+ 
+          {/* Side Panel with gallery images */}
           <div className="rounded-2xl border border-[#FF2020]/20 bg-[#111] p-6">
             <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.4em] text-[#FF2020]">
               Gallery
             </p>
-
-            {/*
-              ⬇️ LINE 135 — GALLERY IMAGES (4 thumbnails)
-              Replace each inner div with an <img> tag:
-              <img src="/images/gallery-1.png" alt="Gallery 1" className="w-full h-full object-cover rounded-xl" />
-              Recommended: 200x200px square thumbnails
-            */}
+ 
             <div className="grid grid-cols-2 gap-3">
-              {[1, 2, 3, 4].map((n) => (
+              {galleryImages.map((img, i) => (
                 <div
-                  key={n}
-                  className="flex aspect-square items-center justify-center rounded-xl border border-dashed border-[#FF2020]/20 bg-[#0a0a0a]"
+                  key={i}
+                  className="flex aspect-square items-center justify-center rounded-xl overflow-hidden"
                 >
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#FF2020]/40">
-                    Img {n}
-                  </p>
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    className="w-full h-full object-cover rounded-xl"
+                  />
                 </div>
               ))}
             </div>
-            {/* ⬆️ LINE 150 — END GALLERY IMAGES */}
-
+ 
             <Button className="mt-6" variant="primary">View Gallery</Button>
           </div>
-
+ 
         </div>
       </section>
-
+ 
     </div>
   );
 };
-
+ 
 export default AboutPage;
