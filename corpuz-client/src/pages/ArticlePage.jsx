@@ -1,111 +1,74 @@
-import Button from "../components/Button";
-import Article1 from "../assets/images/article-origin.jpg";
-import Article2 from "../assets/images/article-goblin.jpg";
-import Article3 from "../assets/images/article-webshooters.jpg";
-import Article4 from "../assets/images/article-miles.jpg";
+import { useParams } from 'react-router-dom';
+import Button from '../components/Button';
+import articles from '../assets/article-content.js';
 
-const articles = [
-  {
-    tag: "Origin",
-    title: "The Night Everything Changed",
-    desc: "A radioactive spider. A science exhibit. One bite that would alter the course of Peter Parker's life — and New York City's — forever.",
-    image: Article1,
-  },
-  {
-    tag: "Villains",
-    title: "The Green Goblin Strikes",
-    desc: "Norman Osborn's descent into madness produced Spider-Man's most personal nemesis. The battle for New York's skyline had begun.",
-    image: Article2,
-  },
-  {
-    tag: "Tech",
-    title: "Engineering the Web-Shooters",
-    desc: "Forget the biology — Peter Parker's greatest invention is the device strapped to his wrists. A breakdown of the web-fluid formula.",
-    image: Article3,
-  },
-  {
-    tag: "Legacy",
-    title: "Miles Morales: The New Spider",
-    desc: "When Brooklyn teenager Miles Morales was bitten by a genetically altered spider, a new chapter in Spider-Man history was written.",
-    image: Article4,
-  },
-];
+function ArticlePage() {
+  const { name } = useParams();
+  const article = articles.find(art => art.name === name);
 
-const ArticlePage = () => {
-  return (
-    <div className="flex w-full flex-col gap-0 bg-[#0a0a0a] text-white">
-      
-      {/* HERO */}
-      <section className="border-b border-[#FF2020]/20 px-6 py-16">
-        <div className="mx-auto max-w-6xl">
-          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.4em] text-[#FF2020]">
-            The Daily Bugle Archives
-          </p>
-
-          <h1 className="max-w-2xl text-4xl font-black uppercase leading-tight text-white sm:text-5xl">
-            Spider-Man:<br />
-            <span className="text-[#FF2020]">The Full Story</span>
-          </h1>
-
-          <p className="mt-5 max-w-lg text-sm leading-7 text-zinc-400">
-            From the radioactive bite that started it all to the battles that
-            defined a generation — every story, every villain, every victory.
-            J. Jonah Jameson won't print these. We will.
-          </p>
-
-          <div className="mt-7">
-            <Button to="/">Back Home</Button>
+  // Early return if article is not found
+  if (!article) {
+    return (
+      <div className="flex w-full flex-col gap-6">
+        <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <h1 className="text-3xl font-bold text-zinc-900">Article not found</h1>
+            <Button to="/articles" className="mt-6">Back to Articles</Button>
           </div>
+        </section>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex w-full flex-col gap-6">
+      {/* Header Section */}
+      <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-4">
+            <Button to="/articles">← Back to Articles</Button>
+          </div>
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-zinc-500">
+            Article
+          </p>
+          <h1 className="text-3xl font-bold leading-tight text-zinc-900 sm:text-4xl">
+            {article.title}
+          </h1>
+          <p className="mt-2 text-sm text-zinc-500">
+            {article.name
+              .split('-')
+              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' ')}
+          </p>
         </div>
       </section>
 
-      {/* ARTICLES */}
-      <section className="border-b border-[#FF2020]/20 bg-[#0f0f0f] px-6 py-14">
-        <div className="mx-auto max-w-6xl">
-          <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.4em] text-[#FF2020]">
-            Featured Stories
-          </p>
+      {/* Content Section */}
+      <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          {/* Placeholder for Article Image */}
+          <div className="flex aspect-video items-center justify-center rounded-[1.25rem] border-2 border-zinc-900 bg-zinc-200 mb-8">
+            <div className="h-24 w-24 border-2 border-zinc-300 bg-zinc-100" />
+          </div>
 
-          <h2 className="mb-10 text-3xl font-black uppercase text-white">
-            Latest Articles
-          </h2>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {articles.map((article, i) => (
-              <article
-                key={i}
-                className="group flex flex-col rounded-2xl border border-[#FF2020]/20 bg-[#111] overflow-hidden transition hover:border-[#FF2020]/60 hover:bg-[#1a0000]"
+          <div className="prose prose-sm max-w-none space-y-4 text-zinc-700">
+            {article.content.map((paragraph, index) => (
+              <p 
+                key={index} 
+                className="text-base leading-7 text-zinc-700 whitespace-pre-wrap"
               >
-                <div className="overflow-hidden">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-
-                <div className="flex flex-col flex-1 p-5">
-                  <span className="mb-3 inline-block rounded-full border border-[#FF2020]/40 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#FF2020]">
-                    {article.tag}
-                  </span>
-
-                  <h3 className="text-base font-black uppercase text-white group-hover:text-[#FF2020] transition-colors leading-tight">
-                    {article.title}
-                  </h3>
-
-                  <p className="mt-3 flex-1 text-sm leading-6 text-zinc-400">
-                    {article.desc}
-                  </p>
-
-                  <Button className="mt-4">Read More</Button>
-                </div>
-              </article>
+                {paragraph}
+              </p>
             ))}
+          </div>
+
+          <div className="mt-8 border-t-2 border-zinc-900 pt-6">
+            <Button to="/articles">Back to Articles</Button>
           </div>
         </div>
       </section>
     </div>
   );
-};
+}
 
 export default ArticlePage;

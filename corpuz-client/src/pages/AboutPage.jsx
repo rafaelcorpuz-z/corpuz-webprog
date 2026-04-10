@@ -1,7 +1,6 @@
 import Button from "../components/Button";
 import Spiderman from '../assets/images/Spiderman.jpg';
  
-// ⬇️ Import your 4 gallery images here, my king!
 import Gallery1 from '../assets/images/gallery-1.jpg';
 import Gallery2 from '../assets/images/gallery-2.jpg';
 import Gallery3 from '../assets/images/gallery-3.jpg';
@@ -72,7 +71,7 @@ const AboutPage = () => {
         </div>
       </section>
  
-      {/* ─── STATS SECTION ────────────────────────────── */}
+    
       <section className="border-b border-[#FF2020]/20 bg-[#0f0f0f] px-6 py-14">
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-8 text-3xl font-black uppercase text-white">
@@ -94,11 +93,11 @@ const AboutPage = () => {
         </div>
       </section>
  
-      {/* ─── CONTENT BLOCKS + SIDE PANEL ─────────────── */}
+
       <section className="border-b border-[#FF2020]/20 px-6 py-14">
         <div className="mx-auto max-w-6xl grid gap-8 lg:grid-cols-[1fr_380px]">
  
-          {/* Story Blocks */}
+        
           <div className="space-y-5">
             {blocks.map((block, i) => (
               <div
@@ -113,7 +112,6 @@ const AboutPage = () => {
             ))}
           </div>
  
-          {/* Side Panel with gallery images */}
           <div className="rounded-2xl border border-[#FF2020]/20 bg-[#111] p-6">
             <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.4em] text-[#FF2020]">
               Gallery

@@ -5,12 +5,16 @@ import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ArticlePage from "./pages/ArticlePage";
+import ArticleListPage from "./pages/ArticleListPage";
+import ArticleDetailPage from "./pages/ArticleDetailPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 // ROUTES CONFIG
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "",
@@ -22,7 +26,11 @@ const router = createBrowserRouter([
       },
       {
         path: "articles",
-        element: <ArticlePage />,
+        element: <ArticleListPage />,
+      },
+      {
+        path: "articles/:name",
+        element: <ArticleDetailPage />,
       },
     ],
   },
