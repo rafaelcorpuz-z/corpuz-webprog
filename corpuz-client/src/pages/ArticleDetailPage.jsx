@@ -1,6 +1,20 @@
 import { useParams } from 'react-router-dom';
 import Button from '../components/Button';
 import articles from '../assets/article-content';
+import articleOrigin from '../assets/images/article-origin.jpg';
+import articleGoblin from '../assets/images/article-goblin.jpg';
+import articleWebshooters from '../assets/images/article-webshooters.jpg';
+import articleMiles from '../assets/images/article-miles.jpg';
+import crawl from '../assets/images/crawl.jpg';
+
+// Map article names to their images
+const articleImages = {
+  'the-radioactive-bite': articleOrigin,
+  'the-green-goblin-rises': articleGoblin,
+  'building-the-web-shooters': articleWebshooters,
+  'miles-morales-the-legacy': articleMiles,
+  'the-symbiote-saga': crawl,
+};
 
 function ArticleDetailPage() {
   const { name } = useParams();
@@ -50,11 +64,13 @@ function ArticleDetailPage() {
       <section className="border-b border-[#FF2020]/20 px-4 sm:px-6 lg:px-8 py-14">
         <div className="mx-auto w-full max-w-3xl">
 
-          {/* Image placeholder */}
-          <div className="mb-8 flex aspect-[4/3] items-center justify-center rounded-2xl border border-dashed border-[#FF2020]/20 bg-[#111]">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-[#FF2020]/40">
-              Article Image
-            </p>
+          {/* Article Image */}
+          <div className="mb-8 flex aspect-[4/3] items-center justify-center rounded-2xl border border-[#FF2020]/20 bg-[#111] overflow-hidden">
+            <img
+              src={articleImages[article.name] || crawl}
+              alt={article.title}
+              className="w-full h-full object-cover"
+            />
           </div>
 
           {/* Article body */}

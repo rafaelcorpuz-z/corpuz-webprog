@@ -20,32 +20,24 @@ const links = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-[#FF2020]/20 bg-[#0a0a0a]">
-
-      {/* Top red line accent */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#FF2020] to-transparent opacity-60" />
-
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
-
-          {/* Logo */}
+    <footer className="bg-[#0a0a0a] border-t border-zinc-900">
+      <div className="mx-auto w-full max-w-6xl px-6 py-12">
+        <div className="flex flex-col items-center gap-8 sm:flex-row sm:justify-between">
           <NavLink to="/" className="flex items-center gap-2 group">
             <WebIcon />
-            <span className="text-base font-black uppercase tracking-widest text-white group-hover:text-[#FF2020] transition-colors">
+            <span className="text-base font-black uppercase tracking-widest text-white group-hover:text-[#FF2020] transition-colors duration-300">
               Spider<span className="text-[#FF2020]">-</span>Man
             </span>
           </NavLink>
-
-          {/* Nav Links */}
-          <nav className="flex items-center gap-6">
+          <nav className="flex items-center gap-8">
             {links.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
                 end={link.to === '/'}
                 className={({ isActive }) =>
-                  `text-[11px] font-bold uppercase tracking-widest transition ${
-                    isActive ? 'text-[#FF2020]' : 'text-zinc-500 hover:text-[#FF2020]'
+                  `text-[11px] font-bold uppercase tracking-widest transition-colors duration-300 ${
+                    isActive ? 'text-[#FF2020]' : 'text-zinc-600 hover:text-[#FF2020]'
                   }`
                 }
               >
@@ -53,22 +45,18 @@ const Footer = () => {
               </NavLink>
             ))}
           </nav>
-
         </div>
 
-        {/* Divider */}
-        <div className="my-6 border-t border-[#FF2020]/10" />
+        <div className="my-8 border-t border-zinc-900" />
 
-        {/* Bottom row */}
         <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-between">
-          <p className="text-[11px] text-zinc-600 uppercase tracking-widest">
+          <p className="text-[11px] text-zinc-700 uppercase tracking-widest">
             © {new Date().getFullYear()} Spider-Man. All rights reserved.
           </p>
-          <p className="text-[11px] text-zinc-700 uppercase tracking-widest">
+          <p className="text-[11px] text-zinc-800 uppercase tracking-widest">
             With great power comes great responsibility.
           </p>
         </div>
-
       </div>
     </footer>
   );

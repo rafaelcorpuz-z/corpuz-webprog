@@ -6,14 +6,15 @@ function ArticlePage() {
   const { name } = useParams();
   const article = articles.find(art => art.name === name);
 
-  // Early return if article is not found
   if (!article) {
     return (
-      <div className="flex w-full flex-col gap-6">
-        <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      <div className="flex w-full flex-col bg-[#0a0a0a] text-white min-h-screen">
+        <section className="px-6 py-20">
           <div className="mx-auto max-w-3xl">
-            <h1 className="text-3xl font-bold text-zinc-900">Article not found</h1>
-            <Button to="/articles" className="mt-6">Back to Articles</Button>
+            <h1 className="text-3xl font-black uppercase text-white">Article not found</h1>
+            <div className="mt-6">
+              <Button to="/articles">Back to Articles</Button>
+            </div>
           </div>
         </section>
       </div>
@@ -21,52 +22,58 @@ function ArticlePage() {
   }
 
   return (
-    <div className="flex w-full flex-col gap-6">
-      {/* Header Section */}
-      <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+    <div className="flex w-full flex-col bg-[#0a0a0a] text-white">
+
+      {/* HEADER */}
+      <section className="px-6 py-16 border-b border-zinc-900">
         <div className="mx-auto max-w-3xl">
-          <div className="mb-4">
+          <div className="mb-8">
             <Button to="/articles">← Back to Articles</Button>
           </div>
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-zinc-500">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.5em] text-[#FF2020]">
             Article
           </p>
-          <h1 className="text-3xl font-bold leading-tight text-zinc-900 sm:text-4xl">
+          <h1 className="text-4xl font-black uppercase leading-tight text-white sm:text-5xl">
             {article.title}
           </h1>
-          <p className="mt-2 text-sm text-zinc-500">
-            {article.name
-              .split('-')
-              .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(' ')}
+          <p className="mt-3 text-sm text-zinc-600 uppercase tracking-widest">
+            {article.name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
           </p>
         </div>
       </section>
 
-      {/* Content Section */}
-      <section className="border-y-2 border-zinc-900 bg-zinc-50 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+      {/* CONTENT */}
+      <section className="px-6 py-16">
         <div className="mx-auto max-w-3xl">
-          {/* Placeholder for Article Image */}
-          <div className="flex aspect-video items-center justify-center rounded-[1.25rem] border-2 border-zinc-900 bg-zinc-200 mb-8">
-            <div className="h-24 w-24 border-2 border-zinc-300 bg-zinc-100" />
+
+          {/* Article Image */}
+          <div className="mb-10 overflow-hidden rounded-2xl">
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-72 object-cover"
+            />
           </div>
 
-          <div className="prose prose-sm max-w-none space-y-4 text-zinc-700">
+          {/* Article Body */}
+          <div className="space-y-6">
             {article.content.map((paragraph, index) => (
-              <p 
-                key={index} 
-                className="text-base leading-7 text-zinc-700 whitespace-pre-wrap"
+              <p
+                key={index}
+                className="text-base leading-8 text-zinc-400 whitespace-pre-wrap"
               >
                 {paragraph}
               </p>
             ))}
           </div>
 
-          <div className="mt-8 border-t-2 border-zinc-900 pt-6">
-            <Button to="/articles">Back to Articles</Button>
+          <div className="mt-12 pt-8 border-t border-zinc-900">
+            <Button to="/articles">← Back to Articles</Button>
           </div>
+
         </div>
       </section>
+
     </div>
   );
 }

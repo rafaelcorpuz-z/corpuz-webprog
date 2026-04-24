@@ -1,40 +1,64 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-// Layout + Pages
-import Layout from "./components/Layout";
-import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import ArticlePage from "./pages/ArticlePage";
-import ArticleListPage from "./pages/ArticleListPage";
-import ArticleDetailPage from "./pages/ArticleDetailPage";
-import NotFoundPage from "./pages/NotFoundPage";
 
-// ROUTES CONFIG
-const router = createBrowserRouter([
+import Layout from './components/Layout';
+import AuthLayout from './components/AuthLayout';
+
+
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ArticleListPage from './pages/ArticleListPage';
+import ArticlePage from './pages/ArticlePage';
+
+
+import SignInPage from './pages/AuthPages/SignInPage';
+import SignUpPage from './pages/AuthPages/SignUpPage';
+
+
+import NotFoundPage from './pages/NotFoundPage';
+
+const routes = [
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     errorElement: <NotFoundPage />,
     children: [
       {
-        path: "",
+        path: '', // Index route (renders at /)
         element: <HomePage />,
       },
       {
-        path: "about",
+        path: 'about',
         element: <AboutPage />,
       },
       {
-        path: "articles",
+        path: 'articles',
         element: <ArticleListPage />,
       },
       {
-        path: "articles/:name",
-        element: <ArticleDetailPage />,
+        path: 'articles/:name',
+        element: <ArticlePage />,
       },
     ],
   },
-]);
+  {
+    path: 'auth',
+    element: <AuthLayout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        path: 'signin',
+        element: <SignInPage />,
+      },
+      {
+        path: 'signup',
+        element: <SignUpPage />,
+      },
+    ],
+  },
+];
+
+const router = createBrowserRouter(routes);
 
 function App() {
   return <RouterProvider router={router} />;
