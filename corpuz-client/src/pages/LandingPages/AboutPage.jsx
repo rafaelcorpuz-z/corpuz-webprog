@@ -1,9 +1,9 @@
-import Button from "../components/Button";
-import Spiderman from '../assets/images/Spiderman.jpg';
-import Gallery1 from '../assets/images/gallery-1.jpg';
-import Gallery2 from '../assets/images/gallery-2.jpg';
-import Gallery3 from '../assets/images/gallery-3.jpg';
-import Gallery4 from '../assets/images/gallery-4.jpg';
+import Button from "../../components/Button";
+import Spiderman from '../../assets/images/Spiderman.jpg';
+import Gallery1 from '../../assets/images/gallery-1.jpg';
+import Gallery2 from '../../assets/images/gallery-2.jpg';
+import Gallery3 from '../../assets/images/gallery-3.jpg';
+import Gallery4 from '../../assets/images/gallery-4.jpg';
 
 const galleryImages = [
   { src: Gallery1, alt: "Gallery 1" },

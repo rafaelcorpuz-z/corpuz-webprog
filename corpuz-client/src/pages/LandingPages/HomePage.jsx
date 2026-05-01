@@ -1,6 +1,6 @@
-import Button from "../components/Button";
-import Spideyhero from "../assets/images/spideyhero.jpg";
-import crawl from "../assets/images/crawl.jpg";
+import Button from "../../components/Button";
+import Spideyhero from "../../assets/images/spideyhero.jpg";
+import crawl from "../../assets/images/crawl.jpg";
 
 const stats = [
   { value: "8+", label: "Years of Experience" },

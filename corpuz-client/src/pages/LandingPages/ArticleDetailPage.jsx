@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
-import Button from '../components/Button';
-import articles from '../assets/article-content';
+import Button from '../../components/Button';
+import articles from '../../assets/article-content';
 import articleOrigin from '../assets/images/article-origin.jpg';
 import articleGoblin from '../assets/images/article-goblin.jpg';
 import articleWebshooters from '../assets/images/article-webshooters.jpg';
