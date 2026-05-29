@@ -1,3 +1,9 @@
+const AdminOnly = ({ children }) => {
+  const type = localStorage.getItem('type');
+  if (type !== 'admin') return <Navigate to="/dashboard" replace />;
+  return children;
+};
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Layout from './components/Layout';
@@ -18,6 +24,7 @@ import DashLayout from './layouts/DashLayout';
 import DashboardPage from './pages/DashboardPages/DashboardPage';
 import ReportsPage from './pages/DashboardPages/ReportsPage';
 import UsersPage from './pages/DashboardPages/UsersPage';
+import DashArticleListPage from './pages/DashboardPages/DashArticleListPage';
 
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -49,7 +56,8 @@ const routes = [
     children: [
       { path: '', element: <DashboardPage /> },
       { path: 'reports', element: <ReportsPage /> },
-      { path: 'users', element: <UsersPage /> },
+      { path: 'users', element: <AdminOnly><UsersPage /></AdminOnly> },
+      { path: 'articles', element: <DashArticleListPage /> },
     ],
   },
 ];

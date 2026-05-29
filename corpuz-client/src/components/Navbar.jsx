@@ -4,16 +4,7 @@ const links = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
   { label: "Articles", to: "/articles" },
-  { label: "Log In", to: "/auth/signin" },
 ];
-
-const navLinkClassName = ({ isActive }) =>
-  [
-    "relative px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300",
-    isActive
-      ? "text-[#FF2020] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-[#FF2020]"
-      : "text-zinc-300 hover:text-[#FF2020] hover:scale-105",
-  ].join(" ");
 
 const WebIcon = () => (
   <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -28,40 +19,64 @@ const WebIcon = () => (
 );
 
 const Navbar = () => {
+  const isLoggedIn = !!localStorage.getItem('token');
+  const username = localStorage.getItem('user');
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[#FF2020]/30 bg-[#0a0a0a]/95 backdrop-blur-md">
-      {/* Subtle web pattern top bar */}
       <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#FF2020] to-transparent opacity-60" />
-
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
 
-        {/* LOGO — replace text with your own SVG logo here */}
-        {/* ⬇️ LINE 33 — LOGO AREA: swap the content below with your custom logo image/SVG */}
         <NavLink to="/" className="flex items-center gap-2 group">
           <WebIcon />
           <span className="text-lg font-black uppercase tracking-widest text-white group-hover:text-[#FF2020] transition-colors duration-300">
             Spider<span className="text-[#FF2020]">-</span>Man
           </span>
         </NavLink>
-        {/* ⬆️ LINE 39 — END OF LOGO AREA */}
 
-        {/* NAV LINKS */}
         <nav className="flex items-center gap-1">
           {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               end={link.to === "/"}
-              className={navLinkClassName}
+              className={({ isActive }) =>
+                [
+                  "relative px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300",
+                  isActive
+                    ? "text-[#FF2020] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-[#FF2020]"
+                    : "text-zinc-300 hover:text-[#FF2020] hover:scale-105",
+                ].join(" ")
+              }
             >
               {link.label}
             </NavLink>
           ))}
+
+          {isLoggedIn ? (
+  <div className="ml-3 flex items-center gap-2">
+    <span className="text-[11px] font-bold uppercase tracking-widest text-zinc-500">
+      Hi, <span className="text-white font-black">{username}</span>
+    </span>
+    <NavLink
+      to="/dashboard"
+      className="inline-flex items-center justify-center rounded-full border-2 border-[#FF2020] bg-[#FF2020] px-5 py-2 text-[11px] font-black uppercase tracking-widest text-white transition-all duration-300 hover:bg-transparent hover:text-[#FF2020]"
+    >
+      Dashboard
+    </NavLink>
+  </div>
+) : (
+  <NavLink
+    to="/auth/signin"
+    className="ml-3 inline-flex items-center justify-center rounded-full border-2 border-[#FF2020] px-5 py-2 text-[11px] font-black uppercase tracking-widest text-[#FF2020] transition-all duration-300 hover:bg-[#FF2020] hover:text-white"
+  >
+    Log In
+  </NavLink>
+)}
         </nav>
 
       </div>
     </header>
   );
 };
-
 export default Navbar;

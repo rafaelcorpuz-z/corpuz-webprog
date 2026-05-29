@@ -14,6 +14,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { styled, alpha } from '@mui/material/styles';
+import ArticleIcon from '@mui/icons-material/Article';
 
 // ── DARK THEME ─────────────────────────────────────────────
 const darkTheme = createTheme({
@@ -64,6 +65,7 @@ const dashboardNavItems = [
   { label: 'Dashboard', title: 'Dashboard', to: '/dashboard', icon: DashboardIcon },
   { label: 'Reports', title: 'Reports', to: '/dashboard/reports', icon: AssessmentIcon },
   { label: 'Users', title: 'Users', to: '/dashboard/users', icon: PeopleIcon },
+  { label: 'Articles', title: 'Articles', to: '/dashboard/articles', icon: ArticleIcon },
 ];
 
 const getPageTitle = (pathname) =>
@@ -106,6 +108,10 @@ const DashLayout = () => {
   const [open, setOpen] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const userType = localStorage.getItem('type');
+  const visibleNavItems = dashboardNavItems.filter(
+    (item) => item.to !== '/dashboard/users' || userType === 'admin'
+  );
   const pageTitle = getPageTitle(location.pathname);
 
   return (
@@ -175,7 +181,12 @@ const DashLayout = () => {
             </Search>
 
             <Button
-              onClick={() => navigate('/')}
+             onClick={() => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  localStorage.removeItem('type');
+  navigate('/');
+}}
               startIcon={<LogoutIcon />}
               sx={{
                 color: 'rgba(255,255,255,0.5)',
@@ -215,7 +226,7 @@ const DashLayout = () => {
           <Toolbar />
           <Box sx={{ pt: 2, pb: 1 }}>
             <List disablePadding>
-              {dashboardNavItems.map(({ label, to, icon: Icon }) => {
+              {visibleNavItems.map(({ label, to, icon: Icon }) => {
                 const isActive = location.pathname === to;
                 return (
                   <ListItem key={to} disablePadding sx={{ display: 'block', px: 1, mb: 0.5 }}>

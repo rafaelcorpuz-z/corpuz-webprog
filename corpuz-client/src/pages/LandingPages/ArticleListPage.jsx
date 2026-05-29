@@ -1,8 +1,34 @@
+import { useState, useEffect } from 'react';
 import Button from '../../components/Button';
 import ArticleList from '../../components/ArticleList';
-import articles from '../../assets/article-content.js';
+import { fetchArticles } from '../../services/ArticleService';
 
 const ArticleListPage = () => {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const { data } = await fetchArticles();
+        const active = data.articles
+          .filter((a) => a.isActive)
+          .map((a) => ({
+            ...a,
+            id: a._id,
+            name: a.slug,
+          }));
+        setArticles(active);
+      } catch (err) {
+        setError('Failed to load articles.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
+
   return (
     <div className="flex w-full flex-col bg-[#0a0a0a] text-white">
 
@@ -33,7 +59,19 @@ const ArticleListPage = () => {
           <h2 className="mb-12 text-4xl font-black uppercase text-white">
             Latest Articles
           </h2>
-          <ArticleList articles={articles} />
+
+          {loading && (
+            <p className="text-zinc-500 text-sm uppercase tracking-widest">Loading…</p>
+          )}
+          {error && (
+            <p className="text-[#FF2020] text-sm">{error}</p>
+          )}
+          {!loading && !error && articles.length === 0 && (
+            <p className="text-zinc-500 text-sm uppercase tracking-widest">No articles yet.</p>
+          )}
+          {!loading && !error && articles.length > 0 && (
+            <ArticleList articles={articles} />
+          )}
         </div>
       </section>
 
