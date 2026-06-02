@@ -19,7 +19,7 @@ const contactNumber = getArg('--contactNumber') || '0000000000';
 const address = getArg('--address') || 'Headquarters';
 
 if (!email || !password) {
-  console.error('Usage: node scripts/createAdmin.js --email admin@example.com --password Secret123! [--username admin]');
+  console.error('Usage: node scripts/createAdmin.js --email admin@admin.com --password 123qweasd! [--username admin]');
   process.exit(1);
 }
 
