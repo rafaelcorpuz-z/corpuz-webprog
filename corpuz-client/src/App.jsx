@@ -20,7 +20,7 @@ import SignInPage from './pages/AuthPages/SignInPage';
 import SignUpPage from './pages/AuthPages/SignUpPage';
 
 // Dashboard
-import DashLayout from './layouts/DashLayout';
+import DashLayout from "./Layouts/DashLayout";
 import DashboardPage from './pages/DashboardPages/DashboardPage';
 import ReportsPage from './pages/DashboardPages/ReportsPage';
 import UsersPage from './pages/DashboardPages/UsersPage';
