@@ -1,5 +1,5 @@
 const constants = {
-  HOST: import.meta.env.VITE_API_URL,
+  HOST: import.meta.env.VITE_API_URL || '/api',
 };
 
 export default constants;

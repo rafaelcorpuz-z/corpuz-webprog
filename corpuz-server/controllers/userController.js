@@ -18,7 +18,9 @@ const createUser = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = await User.create({ ...req.body, password: hashedPassword });
-    res.status(201).json(user);
+    const savedUser = user.toObject();
+    delete savedUser.password;
+    res.status(201).json(savedUser);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -29,7 +31,11 @@ const updateUser = async (req, res) => {
     if (req.body.password) {
       req.body.password = await bcrypt.hash(req.body.password, 10);
     }
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    ).select('-password');
     res.json(user);
   } catch (error) {
     res.status(400).json({ message: error.message });
